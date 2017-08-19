@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<hr>
+<div class="container">
+
+
+    <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-12">
+
+            <h3>{{className}}</h3>
+            <img src="/img/class.jpg" name="{{className}}" height="600" width="300">
+
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <h3>Student List</h3>
+            {% for student in students%}
+            <li>
+                <a> {{student.name}}</a>
+            </li>
+
+            {% endfor %}
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <h3>Instructor</h3>
+            {% for instructor in instructors%}
+            <li>
+                <a> {{instructor.name}}</a>
+            </li>
+
+            {% endfor %}
+        </div>
+    </div>
+</div><!-- /.container -->
+
+{% endblock %}

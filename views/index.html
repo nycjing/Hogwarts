@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h3>Houses</h3>
+<hr>
+
+
+{% for house in houses %}
+<div class="map-container col-sm-6 col-lg-6">
+    <h2><a href="/api/house/{{ house.id}}">{{house.name}}</a></h2>
+    <img src="/img/{{house.name}}.jpg" } name={house.name} height="300" width="300">
+    </img>
+
+</div>
+{% endfor %}
+
+{% endblock %}
+
+

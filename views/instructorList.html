@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container">
+
+    <div class="col-lg-12 col-md-12 col-sm-12">
+
+        <div class="students" id="student-list">
+            <h3>Instructor List</h3>
+            {% for student in instructors%}
+            <p>
+            <li id="deleteItem"  class="col-lg-8">
+                <a value={{student.id}}>{{student.name}}, {{student.age}}, {{student.gender}}, {{student.email}}     </a>
+                <button class="btn remove col-lg-4" id="delete{{student.id}}">X</button>
+            </li>
+
+            </p>
+            {% endfor %}
+        </div>
+
+    </div>
+
+</div><!-- /.container -->
+<script>
+    $removeButton = $('#student-list');
+    $removeButton.on('click','.remove', function (event) {
+        const $selectItem = $(this).prev();
+        const $id = $selectItem.attr("value");
+
+        const $name = $selectItem[0].innerText.split(',')[0];
+        console.log('id',$selectItem.attr("value"),'name',$name);
+
+        $.ajax({
+            method: 'DELETE',
+            url: '/api/instructor/' + $id+'/delete'
+        })
+            .then(function (respond) {
+                console.log(respond);
+                $selectItem[0].innerText = '';
+
+            })
+
+    })
+
+</script>
+{% endblock %}
