@@ -1,42 +1,70 @@
-import React, { Component } from 'react';
+'use strict';
+import axios from 'axios';
+import React, {Component} from 'react';
+import Head from './Head';
+import Main from './Main';
 
-export default class WinterJokes extends Component {
-  constructor() {
-    super()
-    this.nextJoke = this.nextJoke.bind(this)
-    this.answer = this.answer.bind(this)
-  }
+export default class Root extends React.Component {
 
-  componentDidMount() {
-    this.nextJoke()
-  }
 
-  nextJoke() {
-    this.setState({
-      joke: randomJoke(),
-      answered: false,
-    })
-  }
+    render() {
 
-  answer() {
-    this.setState({answered: true})
-  }
+        return (
+            <div>
 
-  render() {
-    if (!this.state) { return null }
+                    <Head/>
 
-    const {joke, answered} = this.state    
-    return (
-      <div>
-        <h1 onClick={answered ? this.nextJoke : this.answer}>{joke.q}</h1>
-        {answered && <h2>{joke.a}</h2>}
-      </div>
-    )
-  }
+
+
+                    <Main/>
+
+
+            </div>
+
+        )
+    }
+}
+
+
+export class WinterJokes extends Component {
+    constructor() {
+        super()
+        this.nextJoke = this.nextJoke.bind(this)
+        this.answer = this.answer.bind(this)
+    }
+
+    componentDidMount() {
+        this.nextJoke()
+    }
+
+    nextJoke() {
+        this.setState({
+            joke: randomJoke(),
+            answered: false,
+        })
+    }
+
+    answer() {
+        this.setState({answered: true})
+    }
+
+    render() {
+        if (!this.state) {
+            return null
+        }
+
+        const {joke, answered} = this.state
+        return (
+            <div>
+                <h1 onClick={answered ? this.nextJoke : this.answer}>{joke.q}</h1>
+                {answered && <h2>{joke.a}</h2>}
+            </div>
+        )
+    }
 }
 
 function randomJoke() {
-  return jokes[Math.floor(Math.random() * jokes.length)]
+    return jokes[Math.floor(Math.random() * jokes.length)]
 }
 
 const jokes = `Q: What did the Arctic wolf ask in the restaurant?
@@ -107,9 +135,9 @@ Q: What do you call ten Arctic hares hopping backwards through the snow together
 A: A receding hare line.
 Q: Why are bad school grades like a shipwreck in the Arctic Ocean?
 A: They're both below C level!`
-  .split('\n')
-  .reduce((all, row, i) =>
-    i % 2 === 0
-    ? [...all, {q: row}]
-    : [...all.slice(0, all.length - 1), Object.assign({a: row}, all[all.length - 1])],
-    [])
+    .split('\n')
+    .reduce((all, row, i) =>
+            i % 2 === 0
+                ? [...all, {q: row}]
+                : [...all.slice(0, all.length - 1), Object.assign({a: row}, all[all.length - 1])],
+        [])
