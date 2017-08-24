@@ -5,22 +5,11 @@ import Head from './Head';
 import Main from './Main';
 
 export default class Root extends React.Component {
-
-
     render() {
-
         return (
             <div>
-
-                    <Head/>
-
-
-
-                    <Main/>
-
-
+                <Main/>
             </div>
-
         )
     }
 }

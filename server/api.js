@@ -18,8 +18,8 @@ var House = db.models.house;
 api.get('/', function (req, res, next) {
     House.findAll({})
         .then(function (houses) {
-            // res.json({houses})
-            res.render('index',{houses})
+            res.json({houses})
+            // res.render('index',{houses})
             // res.render('houseList', {houses});
         })
         .catch(next);

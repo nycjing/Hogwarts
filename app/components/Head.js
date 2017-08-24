@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default class Head extends React.Component {
     render() {
@@ -12,15 +13,15 @@ export default class Head extends React.Component {
                             <span className="icon-bar"></span>
                             <span className="icon-bar"></span>
                         </button>
-                        <a className="navbar-brand" href="/">Hogwart</a>
+                        <Link className="navbar-brand" to="/">Hogwart</Link>
                     </div>
                     <div id="nav-items" className="collapse navbar-collapse">
                         <ul className="nav navbar-nav">
-                            <li><a href="/api/">Houses</a></li>
-                            <li><a href="/api/add">Add</a></li>
-                            <li><a href="/api/students">Students</a></li>
-                            <li><a href="/api/classes">Classes</a></li>
-                            <li><a href="/api/instructors">Instructors</a></li>
+                            <li><Link to="/api">House</Link></li>
+                            {/*<li><Link to="/api/add">Add</Link></li>*/}
+                            {/*<li><Link to="/api/students">Students</Link></li>*/}
+                            {/*<li><Link to="/api/classes">Classes</Link></li>*/}
+                            {/*<li><Link to="/api/instructors">Instructors</Link></li>*/}
                         </ul>
                     </div>
                 </div>

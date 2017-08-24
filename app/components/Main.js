@@ -1,25 +1,37 @@
 import React from 'react';
+// import axios from 'axios';
+import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import Head from './Head';
+import Hogwarts_logo from './Hogwarts_logo'
+import Hogwarts from './Hogwarts'
 
 export default class Main extends React.Component {
 
     render() {
 
         return (
-            <div className="container content">>
-                <div className="col-xs-12">
-                    <a href="/api/">
-                        <p> </p>
-                        <h1>Hogwart school of witchcraft and wizardry</h1>
-                        <img src="/img/hogwarts.png" height="600" width="600"/>
-                    </a>
+            <Router>
+                 <div>
+                   <Head />
                     <div id="main" className="container-fluid">
-                        <div className="col-xs-2">
-
+                        <div className="col-xs-12">
+                            <Switch>
+                                <Route exact path="/" component={Hogwarts_logo} />
+                                <Route exact path="/api" component={Hogwarts} />
+                                {/*<Route path="/api/house/:houseId" component={SingleAlbum} />*/}
+                                {/*<Route path="/api/add" component={SingleAlbum} />*/}
+                                {/*<Route exact path="/api/students" component={StatefulArtists} />*/}
+                                {/*<Route path="/api/students/:studentId" component={SingleArtist} />*/}
+                                {/*<Route exact path="/api/instructors" render={() => <NewPlaylist addPlaylist={addPlaylist} />} />*/}
+                                {/*<Route path="/api/instructors/:instructorId" component={Playlist} />*/}
+                                {/*<Route exact path="/api/classes/" component={StatefulAlbums} />*/}
+                                {/*<Route path="/api/classes/:className" component={Playlist} />*/}
+                            </Switch>
                         </div>
 
                     </div>
                 </div>
-            </div>
+            </Router>
         )
     }
 }
