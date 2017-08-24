@@ -160,12 +160,12 @@ api.get('/house/:houseId', function (req, res, next) {
 
     Promise.all([findHouse, findStudents, findInstructors])
         .spread(function (house, students, instructors) {
-            // res.json({house,students,instructors})
-            res.render('housepage', {
-                students: students,
-                house: house,
-                instructors: instructors
-            });
+            res.json({house,students,instructors})
+            // res.render('housepage', {
+            //     students: students,
+            //     house: house,
+            //     instructors: instructors
+            // });
         })
         .catch(next);
 

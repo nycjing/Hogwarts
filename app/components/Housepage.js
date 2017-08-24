@@ -7,53 +7,67 @@ export default class Housepage extends React.Component {
         super();
         this.state = {
             house: {},
-            students:[],
+            students: [],
             instructors: []
         };
 
     }
 
     componentDidMount() {
+        const houseId = this.props.match.params.houseId;
+        console.log(houseId)
         axios.get(`/api/house/${houseId}`)
-            .then(res => res.data)
-            .then((house,students,instructors) => this.setState({
-                house, students, instructors}));
+            .then(res => {
+                console.log(res.data);
+                return res.data
+            })
+            .then(data => {
+                console.log('will be the input---', data)
+                this.setState({
+                    house: data.house,
+                    students: data.students,
+                    instructors: data.instructors
+                })
+
+            });
     }
 
     render() {
         const house = this.state.house;
         const students = this.state.students;
         const instructors = this.state.instructors;
-        console.log(house,students,instructors);
+        console.log(house, students, instructors.length);
         return (
-                    <div className="row">
-                        <div className="col-lg-4 col-md-6 col-sm-12">
+            <div className="row">
+                <div className="col-lg-4 col-md-6 col-sm-12" key={house.id}>
 
-                            <h3>{house.name}</h3>
-                            <img src={`/img/${house.name}.jpg`} name={house.name} height="300" width="300">
+                    <h3>{house.name}</h3>
+                    <img src={`/img/${house.name}.jpg`} name={house.name} height="300" width="300"/>
 
+                </div>
+
+                <h3>Student List</h3>
+                {
+                    (students.length > 0) && students.map(student => (
+                        <div className="col-lg-4 col-md-6 col-sm-12" key={student.id}>
+                            <li>{student.name}</li>
                         </div>
-                        <div className="col-lg-4 col-md-6 col-sm-12">
-                            <h3>Student List</h3>
-                            {
-                                students.map(student=>(
-                                            <h2><Link to={`/api/student/${student.id}`}>${student.name}</Link></h2>
-                                    )
-                                )
-                            }
+                        )
+                    )
+                }
+                <h3>Instructor</h3>
+                {
+                    (instructors.length > 0) && instructors.map(instructor => (
+                        <div className="col-lg-4 col-md-6 col-sm-12" key={instructor.id}>
+                            <li>{instructor.name}</li>
                         </div>
-                        <div className="col-lg-4 col-md-6 col-sm-12">
-                            <h3>Instructor</h3>
-                            {
-                                instructors.map(instructor=>(
-                                        <h2><Link to={`/api/instructor/${instructor.id}`}>${instructor.name}</Link></h2>
-                                    )
-                                )
-                            }
-                        </div>
-                    </div>
+                        )
+                    )
+                }
 
-                )
-        }
+            </div>
 
+        )
     }
+
+}

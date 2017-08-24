@@ -2,14 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="24296e81-d748-4bd1-945c-1a48a8603e32" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/components/Hogwarts.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/components/Hogwarts_logo.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/components/Housepage.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/components/Head.js" afterPath="$PROJECT_DIR$/app/components/Head.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/components/Hogwarts.js" afterPath="$PROJECT_DIR$/app/components/Hogwarts.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/components/Hogwarts_logo.js" afterPath="$PROJECT_DIR$/app/components/Hogwarts_logo.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/components/Housepage.js" afterPath="$PROJECT_DIR$/app/components/Housepage.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/components/Main.js" afterPath="$PROJECT_DIR$/app/components/Main.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/components/Root.jsx" afterPath="$PROJECT_DIR$/app/components/Root.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/api.js" afterPath="$PROJECT_DIR$/server/api.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -39,8 +37,8 @@
       <file leaf-file-name="Main.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/components/Main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="34" column="9" lean-forward="true" selection-start-line="34" selection-start-column="9" selection-end-line="34" selection-end-column="9" />
+            <state relative-caret-position="315">
+              <caret line="21" column="56" lean-forward="true" selection-start-line="21" selection-start-column="56" selection-end-line="21" selection-end-column="56" />
               <folding>
                 <element signature="e#57#130#0" expanded="true" />
               </folding>
@@ -61,8 +59,8 @@
       <file leaf-file-name="Housepage.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/components/Housepage.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+            <state relative-caret-position="285">
+              <caret line="64" column="21" lean-forward="true" selection-start-line="64" selection-start-column="21" selection-end-line="64" selection-end-column="21" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -93,8 +91,8 @@
       <file leaf-file-name="api.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server/api.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1506">
-              <caret line="22" column="12" lean-forward="false" selection-start-line="22" selection-start-column="12" selection-end-line="22" selection-end-column="12" />
+            <state relative-caret-position="474">
+              <caret line="176" column="16" lean-forward="true" selection-start-line="176" selection-start-column="16" selection-end-line="176" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -103,12 +101,12 @@
       <file leaf-file-name="Hogwarts.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/components/Hogwarts.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+            <state relative-caret-position="274">
+              <caret line="27" column="24" lean-forward="false" selection-start-line="27" selection-start-column="24" selection-end-line="27" selection-end-column="46" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
-                <marker date="1503562710000" expanded="true" signature="527:1110" ph="..." />
-                <marker date="1503562710000" expanded="true" signature="597:1091" ph="..." />
+                <marker date="1503580358000" expanded="true" signature="501:1176" ph="..." />
+                <marker date="1503580358000" expanded="true" signature="571:1157" ph="..." />
               </folding>
             </state>
           </provider>
@@ -117,9 +115,11 @@
       <file leaf-file-name="Hogwarts_logo.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/components/Hogwarts_logo.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="38" />
-              <folding />
+            <state relative-caret-position="225">
+              <caret line="15" column="27" lean-forward="true" selection-start-line="15" selection-start-column="27" selection-end-line="15" selection-end-column="27" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -127,8 +127,8 @@
       <file leaf-file-name="Head.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/components/Head.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="27" column="18" lean-forward="true" selection-start-line="27" selection-start-column="18" selection-end-line="27" selection-end-column="18" />
+            <state relative-caret-position="360">
+              <caret line="24" column="29" lean-forward="true" selection-start-line="24" selection-start-column="29" selection-end-line="24" selection-end-column="29" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -166,12 +166,12 @@
         <option value="$PROJECT_DIR$/views/instructorList.html" />
         <option value="$PROJECT_DIR$/public/index.html" />
         <option value="$PROJECT_DIR$/app/components/Root.jsx" />
-        <option value="$PROJECT_DIR$/app/components/Hogwarts_logo.js" />
-        <option value="$PROJECT_DIR$/server/api.js" />
         <option value="$PROJECT_DIR$/package.json" />
-        <option value="$PROJECT_DIR$/app/components/Head.js" />
         <option value="$PROJECT_DIR$/app/components/Main.js" />
         <option value="$PROJECT_DIR$/app/components/Hogwarts.js" />
+        <option value="$PROJECT_DIR$/app/components/Hogwarts_logo.js" />
+        <option value="$PROJECT_DIR$/app/components/Head.js" />
+        <option value="$PROJECT_DIR$/server/api.js" />
         <option value="$PROJECT_DIR$/app/components/Housepage.js" />
       </list>
     </option>
@@ -313,12 +313,12 @@
       <workItem from="1503407057364" duration="1627000" />
       <workItem from="1503409064321" duration="2339000" />
       <workItem from="1503434496591" duration="17000" />
-      <workItem from="1503556694947" duration="5889000" />
+      <workItem from="1503556694947" duration="10319000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="38544000" />
+    <option name="totallyTimeSpent" value="42974000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1673" y="36" width="1581" height="972" extended-state="0" />
@@ -671,26 +671,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/components/Head.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="27" column="18" lean-forward="true" selection-start-line="27" selection-start-column="18" selection-end-line="27" selection-end-column="18" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/components/Main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="34" column="9" lean-forward="true" selection-start-line="34" selection-start-column="9" selection-end-line="34" selection-end-column="9" />
-          <folding>
-            <element signature="e#57#130#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/housepage.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -699,38 +679,60 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/api.js">
+    <entry file="file://$PROJECT_DIR$/app/components/Hogwarts_logo.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1506">
-          <caret line="22" column="12" lean-forward="false" selection-start-line="22" selection-start-column="12" selection-end-line="22" selection-end-column="12" />
-          <folding />
+        <state relative-caret-position="225">
+          <caret line="15" column="27" lean-forward="true" selection-start-line="15" selection-start-column="27" selection-end-line="15" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/components/Hogwarts_logo.js">
+    <entry file="file://$PROJECT_DIR$/app/components/Main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="38" />
-          <folding />
+        <state relative-caret-position="315">
+          <caret line="21" column="56" lean-forward="true" selection-start-line="21" selection-start-column="56" selection-end-line="21" selection-end-column="56" />
+          <folding>
+            <element signature="e#57#130#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/components/Head.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="24" column="29" lean-forward="true" selection-start-line="24" selection-start-column="29" selection-end-line="24" selection-end-column="29" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/components/Hogwarts.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+        <state relative-caret-position="274">
+          <caret line="27" column="24" lean-forward="false" selection-start-line="27" selection-start-column="24" selection-end-line="27" selection-end-column="46" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
-            <marker date="1503562710000" expanded="true" signature="527:1110" ph="..." />
-            <marker date="1503562710000" expanded="true" signature="597:1091" ph="..." />
+            <marker date="1503580358000" expanded="true" signature="501:1176" ph="..." />
+            <marker date="1503580358000" expanded="true" signature="571:1157" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/api.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="474">
+          <caret line="176" column="16" lean-forward="true" selection-start-line="176" selection-start-column="16" selection-end-line="176" selection-end-column="16" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/components/Housepage.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+        <state relative-caret-position="285">
+          <caret line="64" column="21" lean-forward="true" selection-start-line="64" selection-start-column="21" selection-end-line="64" selection-end-column="21" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>

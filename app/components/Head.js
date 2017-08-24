@@ -17,7 +17,7 @@ export default class Head extends React.Component {
                     </div>
                     <div id="nav-items" className="collapse navbar-collapse">
                         <ul className="nav navbar-nav">
-                            <li><Link to="/api">House</Link></li>
+                            <li><Link to="/main">House</Link></li>
                             {/*<li><Link to="/api/add">Add</Link></li>*/}
                             {/*<li><Link to="/api/students">Students</Link></li>*/}
                             {/*<li><Link to="/api/classes">Classes</Link></li>*/}

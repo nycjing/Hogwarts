@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Head from './Head';
 import Hogwarts_logo from './Hogwarts_logo'
 import Hogwarts from './Hogwarts'
+import Housepage from './Housepage'
 
 export default class Main extends React.Component {
 
@@ -17,8 +18,8 @@ export default class Main extends React.Component {
                         <div className="col-xs-12">
                             <Switch>
                                 <Route exact path="/" component={Hogwarts_logo} />
-                                <Route exact path="/api" component={Hogwarts} />
-                                {/*<Route path="/api/house/:houseId" component={SingleAlbum} />*/}
+                                <Route exact path="/main" component={Hogwarts} />
+                                <Route path="/house/:houseId" component={Housepage} />
                                 {/*<Route path="/api/add" component={SingleAlbum} />*/}
                                 {/*<Route exact path="/api/students" component={StatefulArtists} />*/}
                                 {/*<Route path="/api/students/:studentId" component={SingleArtist} />*/}
