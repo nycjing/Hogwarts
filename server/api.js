@@ -36,8 +36,8 @@ api.get('/classes', function (req, res, next) {
                 return classes = classes.concat(student.classes);
             });
             classes = Array.from(new Set(classes));
-            // res.json({classes})
-            res.render('classesList', {classes});
+            res.json(classes)
+            // res.render('classesList', {classes});
         });
 });
 
@@ -52,8 +52,8 @@ api.get('/instructors/', function (req, res, next) {
         ]
     })
         .then(function (instructors) {
-            // res.json(instructors)
-            res.render('instructorList', {instructors: instructors});
+            res.json(instructors)
+            // res.render('instructorList', {instructors: instructors});
         })
         .catch(next);
 
@@ -69,11 +69,17 @@ api.get('/students/', function (req, res, next) {
         ]
     })
         .then(function (students) {
-            // res.json(students)
-           res.render('studentList', {students: students});
+            res.json(students)
+           // res.render('studentList', {students: students});
         })
         .catch(next);
 
+});
+
+api.get('/students/:studentId', function (req, res, next) {
+    Student.findById(req.params.studentId)
+        .then(student => res.json(student))
+        .catch(next);
 });
 
 // /api/add  render add student/instructor form
@@ -81,8 +87,8 @@ api.get('/add', function (req, res, next) {
 
     House.findAll({})
         .then(function (houses) {
-            // res.json(houses)
-            res.render('addstudent.html', {houses});
+            res.json(houses)
+            // res.render('addstudent.html', {houses});
         })
         .catch(next);
 });
@@ -112,7 +118,7 @@ api.post('/', function (req, res, next) {
                 var newStudent = Student.build(member);
                 newStudent.save()
                     .then(function () {
-                        res.redirect('/api');
+                        res.json(newStudent)
                     })
                     .catch(next)}
             else {
@@ -130,7 +136,7 @@ api.post('/', function (req, res, next) {
 
                 newInstructor.save()
                     .then(function () {
-                        res.redirect('/api');
+                        res.json(newInstructor)
                     })
                     .catch(next)
             }
@@ -216,7 +222,8 @@ api.delete('/student/:studentId/delete', function (req, res, next) {
         }
     })
         .then(function () {
-            res.send('/api');
+            // res.send('/api');
+            res.send('done');
         })
         .catch(next);
 
@@ -232,7 +239,8 @@ api.delete('/instructor/:instructorId/delete', function (req, res, next) {
         }
     })
         .then(function () {
-            res.redirect('/api');
+            // res.redirect('/api');
+            res.send('done');
         })
         .catch(next);
 
