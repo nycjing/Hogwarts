@@ -11,6 +11,7 @@ api.get('/hello', (req, res) => res.send({hello: 'world'}))
 var Student = db.models.student;
 var Instructor = db.models.instructor;
 var House = db.models.house;
+var Course = db.models.course;
 
 
 // /api/  render houseList.html
@@ -28,18 +29,59 @@ api.get('/', function (req, res, next) {
 });
 
 // /api/classes render classList.html
-api.get('/classes', function (req, res, next) {
-    var classes = [];
-    Student.findAll()
-        .then(function (students) {
-            students.map(function (student) {
-                return classes = classes.concat(student.classes);
-            });
-            classes = Array.from(new Set(classes));
-            res.json(classes)
-            // res.render('classesList', {classes});
-        });
+api.get('/courses', function (req, res, next) {
+    Course.findAll({})
+        .then(function (courses) {
+            res.json({courses})
+        })
+        .catch(next);
+
 });
+
+// /api/classes/:className render classpage.html
+api.get('/course/:courseId', function (req, res, next) {
+
+    Course.findById(req.params.courseId)
+        .then(course => res.json(course))
+        .catch(next);
+
+    var findStudents = Student.findAll({
+
+        include: [
+            {model: Course,
+             through: StudentCourse,
+                where :{
+                courseId: req.params.courseId
+                }
+            }
+        ],
+        where :{
+            id: studentId
+        }
+    });
+
+
+    var findInstructor = Instructor.findAll({
+        where :{
+            courseId: req.params.courseId
+        }
+    });
+
+
+    Promise.all([findStudents, findInstructors])
+        .spread(function (students, instructors) {
+            res.json({students,instructors})
+            // res.render('classpage', {
+            //     className: req.params.className,
+            //     students: students,
+            //     instructors: instructors
+            // });
+        })
+        .catch(next);
+
+
+});
+
 
 
 // /api/instructors render instructorList.html
@@ -48,7 +90,8 @@ api.get('/instructors/', function (req, res, next) {
     // res.send('list student')
     Instructor.findAll({
         include: [
-            {model: House}
+            {model: House},
+            {model: Course}
         ]
     })
         .then(function (instructors) {
@@ -167,51 +210,11 @@ api.get('/house/:houseId', function (req, res, next) {
     Promise.all([findHouse, findStudents, findInstructors])
         .spread(function (house, students, instructors) {
             res.json({house,students,instructors})
-            // res.render('housepage', {
-            //     students: students,
-            //     house: house,
-            //     instructors: instructors
-            // });
+
         })
         .catch(next);
 
 });
-// /api/student/:studentId/delet  delete student
-api.get('/class/:className', function (req, res, next) {
-
-    var findStudents = Student.findAll({
-        where: {
-            classes: {
-                $contains: [req.params.className]
-            }
-        },
-        include: [
-            {model: House}
-        ]
-    });
-
-    var findInstructors = Instructor.findAll({
-        where: {
-            class: req.params.className
-            }
-        });
-
-
-    Promise.all([findStudents, findInstructors])
-        .spread(function (students, instructors) {
-            res.render('classpage', {
-                className: req.params.className,
-                students: students,
-                instructors: instructors
-            });
-        })
-        .catch(next);
-
-
-});
-
-
-
 
 // /api/student/:studentId/delet  delete student
 api.delete('/student/:studentId/delete', function (req, res, next) {

@@ -5,8 +5,20 @@ import Head from './Head';
 import Hogwarts_logo from './Hogwarts_logo'
 import Hogwarts from './Hogwarts'
 import Housepage from './Housepage'
+import Addmember from './Addmember'
+import Students from './Students'
+import Editmember from './Editmember'
+import Instructors from './Instructors'
+import Courses from './Courses'
+import store, {fetchHouses, fetchCourses, fetchStudents, fetchInstructors} from '../store';
 
 export default class Main extends React.Component {
+    componentDidMount() {
+        store.dispatch(fetchHouses());
+        store.dispatch(fetchCourses());
+        store.dispatch(fetchStudents());
+        store.dispatch(fetchInstructors());
+    }
 
     render() {
 
@@ -20,13 +32,13 @@ export default class Main extends React.Component {
                                 <Route exact path="/" component={Hogwarts_logo} />
                                 <Route exact path="/main" component={Hogwarts} />
                                 <Route path="/house/:houseId" component={Housepage} />
-                                {/*<Route path="/api/add" component={SingleAlbum} />*/}
-                                {/*<Route exact path="/api/students" component={StatefulArtists} />*/}
-                                {/*<Route path="/api/students/:studentId" component={SingleArtist} />*/}
-                                {/*<Route exact path="/api/instructors" render={() => <NewPlaylist addPlaylist={addPlaylist} />} />*/}
-                                {/*<Route path="/api/instructors/:instructorId" component={Playlist} />*/}
-                                {/*<Route exact path="/api/classes/" component={StatefulAlbums} />*/}
-                                {/*<Route path="/api/classes/:className" component={Playlist} />*/}
+                                <Route path="/add" component={Addmember} />
+                                <Route exact path="/students" component={Students} />
+                                <Route path="/students/:studentId" component={Editmember} />
+                                <Route exact path="/instructors" component={Instructors} />} />
+                                <Route path="/api/instructors/:instructorId" component={Editmember} />
+                                <Route exact path="/classes/" component={Courses} />
+                                <Route path="/classes/:classId" component={Courses} />
                             </Switch>
                         </div>
 

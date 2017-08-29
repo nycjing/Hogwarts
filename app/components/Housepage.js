@@ -38,18 +38,17 @@ export default class Housepage extends React.Component {
         const instructors = this.state.instructors;
         console.log(house, students, instructors.length);
         return (
+            <div className="container">
+                <h3>Single House Page</h3>
             <div className="row">
                 <div className="col-lg-4 col-md-6 col-sm-12" key={house.id}>
-
                     <h3>{house.name}</h3>
                     <img src={`/img/${house.name}.jpg`} name={house.name} height="300" width="300"/>
-
                 </div>
-
                 <h3>Student List</h3>
                 {
-                    (students.length > 0) && students.map(student => (
-                        <div className="col-lg-4 col-md-6 col-sm-12" key={student.id}>
+                    (students) && students.map(student => (
+                        <div className="col-lg-6 col-md-6 col-sm-12" key={student.id}>
                             <li>{student.name}</li>
                         </div>
                         )
@@ -57,14 +56,14 @@ export default class Housepage extends React.Component {
                 }
                 <h3>Instructor</h3>
                 {
-                    (instructors.length > 0) && instructors.map(instructor => (
-                        <div className="col-lg-4 col-md-6 col-sm-12" key={instructor.id}>
+                    (instructors) && instructors.map(instructor => (
+                        <div className="col-lg-6 col-md-6 col-sm-12" key={instructor.id}>
                             <li>{instructor.name}</li>
                         </div>
                         )
                     )
                 }
-
+            </div>
             </div>
 
         )

@@ -19,24 +19,7 @@ module.exports = db.define('instructor', {
             validate: {
                 isEmail: true,
             }
-        },
-        class: {
-            type: Sequelize.STRING,
         }
-    },
-    {
-        classMethods: {
-            findByClass: function (c){
-                return this.findOne({
-                    where: {
-                        class: {
-                            $eq: c,
-                        }
-                    }
-                });
-            }
-        }
-
     }
 
 );
