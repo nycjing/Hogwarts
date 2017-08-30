@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import AssignCourse from './AssignCourse';
 
 export default class Addmember extends React.Component {
     constructor() {
@@ -9,7 +10,6 @@ export default class Addmember extends React.Component {
             email:  '',
             age:    11,
             gender: '',
-            classes: '',
             dbtable: '',
             house: '',
             houses: [],
@@ -26,16 +26,17 @@ export default class Addmember extends React.Component {
 
     handleChange (evt) {
         const value = evt.target.value;
+        console.log(value)
         this.setState({
             [evt.target.name]: value
         });
     }
 
-    handleSubmit () {
+    handleSubmit (evt) {
         evt.preventDefault();
         const inputbody = this.state;
-        console.log(inputbody);
-        axios.post(`/api/`, {inputbody})
+        console.log('-----input---',inputbody);
+        axios.post(`/api/`, inputbody)
             .then(res => {
                 console.log(res.data);
                 return res.data
@@ -54,7 +55,6 @@ export default class Addmember extends React.Component {
             email:  '',
             age:    11,
             gender: '',
-            classes: '',
             dbtable: '',
             house: '',
             houses: [],
@@ -109,12 +109,6 @@ export default class Addmember extends React.Component {
                         </select>
                     </div>
                 </div>
-                <div className="form-group">
-                    <label className="col-sm-2 control-label">Classes</label>
-                    <div className="col-sm-10">
-                        <input name="classes" type="text" className="form-control" value={this.state.classes} onChange={this.handleChange}/>
-                    </div>
-                </div>
                  <div className="form-group">
                     <div className="col-sm-10">
                     <label className="col-sm-2 control-label">Add: </label>
@@ -126,7 +120,9 @@ export default class Addmember extends React.Component {
                      <button type="submit" className="btn btn-primary">submit</button>
                  </div>
             </section>
+
             </form>
+            <AssignCourse />
             </div>
         )
     }

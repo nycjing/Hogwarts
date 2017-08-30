@@ -13,12 +13,15 @@ const GET_STUDENTS = 'GET_STUDENTS';
 const GET_INSTRUCTORS = 'GET_INSTRUCTORS';
 const REMOVE_STUDENT = 'REMOVE_STUDENT';
 const REMOVE_INSTRUCTOR = 'REMOVE_INSTRUCTOR';
+const WRITE_COURSE = 'WRITE_COURSE';
+const POST_COURSE = 'POST_COURSE';
 
 const initialState = {
-    houses: [],
-    courses: [],
-    students: [],
-    instructors: []
+    houses : [],
+    courses : [],
+    students : [],
+    instructors : [],
+    newCourseEntry : '',
 };
 
 export function fetchHouses () {
@@ -84,6 +87,16 @@ export function deleteInstructor (instructorId) {
     }
 }
 
+export function postCourseToServer(newCourseEntry){
+    return function thunk (dispatch) {
+        return axios.post('/api/courses', newCourseEntry)
+            .then((course)=>{
+                dispatch(postCourse(course.data));
+                dispatch(writeCourse(''));
+            })
+    }
+}
+
 export function gotHousesFromServer (houses) {
     return {
         type: GET_HOUSES,
@@ -124,6 +137,20 @@ export function removeInstructor (instructorId) {
     }
 }
 
+export function writeCourse(newCourseEntry){
+    return{
+        type: WRITE_COURSE,
+        newCourseEntry
+    }
+}
+
+export function postCourse (newCourseEntry){
+    return {
+        type: POST_COURSE,
+        newCourseEntry
+    }
+}
+
 const rootReducer = function(state = initialState, action) {
     switch(action.type) {
         case GET_HOUSES:
@@ -140,6 +167,10 @@ const rootReducer = function(state = initialState, action) {
         case REMOVE_INSTRUCTOR:
             return Object.assign({}, state, {
                 instructors: state.instructors.filter(instructor => instructor.id !== action.instructorId)});
+        case WRITE_COURSE:
+            return Object.assign({}, state, {newCourseEntry: action.newCourseEntry});
+        case POST_COURSE:
+            return Object.assign({}, state, {courses: state.courses.concat(action.newCourseEntry)});
         default: return state
     }
 };

@@ -82,6 +82,21 @@ api.get('/course/:courseId', function (req, res, next) {
 
 });
 
+// /api/courses/ post course data to db
+
+api.post('/courses', function (req, res, next) {
+    console.log(req.body.newCourse);
+    const courseName = req.body.newCourse
+    const newCourse = Course.build({name:courseName});
+    newCourse.save()
+        .then(function () {
+            console.log(newCourse );
+            res.json(newCourse)
+        })
+        .catch(next)
+});
+
+
 
 
 // /api/instructors render instructorList.html
@@ -137,7 +152,7 @@ api.get('/add', function (req, res, next) {
 });
 
 
-// /api post data to DB
+// /api post member data to DB
 api.post('/', function (req, res, next) {
     console.log(req.body);
     var member;
@@ -153,7 +168,6 @@ api.post('/', function (req, res, next) {
                     email: req.body.email,
                     age: req.body.age,
                     gender: req.body.gender,
-                    classes: req.body.classes,
                     houseId: house.id
                 };
                 console.log(member);
@@ -170,7 +184,6 @@ api.post('/', function (req, res, next) {
                     email: req.body.email,
                     age: req.body.age,
                     gender: req.body.gender,
-                    class: req.body.classes,
                     houseId: house.id
                 };
                 console.log(member);

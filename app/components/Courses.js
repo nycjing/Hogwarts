@@ -1,6 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import store, {fetchCourses} from '../store';
+import NewCourse from './NewCourse'
+
 export default class Courses extends React.Component {
 
     constructor() {
@@ -31,6 +33,7 @@ export default class Courses extends React.Component {
                         </li>
                         ))
                     }
+                    <NewCourse />
             </div>
         )
     }

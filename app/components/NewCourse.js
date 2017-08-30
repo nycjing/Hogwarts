@@ -1,24 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { postCourse, writeCourse } from '../store';
+import { postCourseToServer, writeCourse } from '../store';
 
 function NewCourse (props) {
 
     const { newCourseEntry, handleChange, handleSubmit } = props;
 
     return (
-        <form id="new-message-form" onSubmit={evt => handleSubmit( newCourseEntry, evt)}>
-            <div className="input-group input-group-lg">
+        <form id="new-message-form" onSubmit={props.handleSubmit}>
+            <div className="input-group">
                 <input
                     className="form-control"
                     type="text"
-                    name="content"
+                    name="courseName"
                     value={newCourseEntry}
-                    onChange={handleChange}
+                    onChange={props.handleChange}
                 />
                 <span className="input-group-btn">
-          <button className="btn btn-default" type="submit">Chat!</button>
-        </span>
+                <button className="btn btn-default" type="submit">Add Course</button>
+                </span>
             </div>
         </form>
     );
@@ -36,13 +36,11 @@ const mapDispatchToProps = function (dispatch, ownProps) {
         handleChange (evt) {
             dispatch(writeCourse(evt.target.value));
         },
-        handleSubmit ( newCourseEntry, evt) {
+        handleSubmit (evt) {
             evt.preventDefault();
-
+            const newCourse = evt.target.courseName.value;
             const { courseId } = ownProps;
-
-            dispatch(postCourse({ newCourseEntry, courseId }));
-            dispatch(writeCourse(''));
+            dispatch(postCourseToServer({ newCourse}));
         }
     };
 };
