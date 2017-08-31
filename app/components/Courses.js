@@ -32,10 +32,10 @@ export default class Courses extends React.Component {
                 <h3>Class List</h3>
                     {
                         courses && courses.map(course=> (
-                        <div>
+                        <div key = {course.id} >
                             <div className="col-sm-6">
                                 <li >
-                                <Link value={course.id} key = {course.id} to={`/classes/${course.id}`}>{course.name} </Link>
+                                <Link value={course.id} to={`/classes/${course.id}`}>{course.name} </Link>
                                 </li>
                             </div>
                             <input className="col-cm-1" onClick={()=> this.handleRemove(course.id)} type='button' value='x'/>

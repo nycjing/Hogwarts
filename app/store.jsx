@@ -19,6 +19,8 @@ const POST_COURSE = 'POST_COURSE';
 const REMOVE_COURSE = 'REMOVE_COURSE';
 const ASSIGN_COURSE_TO_STUDENT = 'ASSIGN_COURSE_TO_STUDENT';
 const GOT_STUDENT_COURSE = 'GOT_STUDENT_COURSE';
+const GOT_COURSE_STUDENT = 'GOT_COURSE_STUDENT';
+
 
 const initialState = {
     houses : [],
@@ -26,7 +28,8 @@ const initialState = {
     students : [],
     instructors : [],
     newCourseEntry : '',
-    studentCourse : [],
+    studentCourses : [],
+    courseStudents : [],
 };
 
 export function fetchHouses () {
@@ -65,7 +68,7 @@ export function fetchStudentsCourse(courseId){
             .then(res => res.data)
             .then(({students, instructors}) => {
                 console.log('get back from fron',students, instructors);
-                dispatch(gotStudentsFromServer(students))
+                dispatch(gotStudentsOneCourse(students))
             });
     }
 }
@@ -129,10 +132,11 @@ export function assignCourseToStudent (studentId, course){
     return function thunk (dispatch){
         const body = {studentId, course}
         return axios.put('/api/student/assign', body)
-            .then((student)=>{
-                console.log('update student', student)
+            .then(res=>res.data)
+            .then(({students})=>{
+                console.log('update student', students)
+                dispatch(gotStudentsOneCourse(students))
             })
-
     }
 
 }
@@ -198,10 +202,10 @@ export function postCourse (newCourseEntry){
     }
 }
 
-export function gotStudentsWithCourse (){
+export function gotStudentsOneCourse (courseStudents){
     return{
-        type: GOT_STUDENT_COURSE,
-        courses
+        type: GOT_COURSE_STUDENT,
+        courseStudents
     }
 }
 
@@ -227,6 +231,8 @@ const rootReducer = function(state = initialState, action) {
             return Object.assign({}, state, {courses: state.courses.concat(action.newCourseEntry)});
         case REMOVE_COURSE:
             return Object.assign({},state,{courses: state.courses.filter(course=> course.id !== action.courseId)});
+        case GOT_COURSE_STUDENT:
+            return Object.assign({}, state, {courseStudents : action.courseStudents});
         default: return state
     }
 };

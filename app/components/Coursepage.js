@@ -14,8 +14,8 @@ export default class Coursepage extends React.Component {
     componentDidMount () {
         const courseId = +this.props.match.params.classId;
         store.dispatch(fetchCourses());
-        // store.dispatch(fetchStudents());
-        store.dispatch(fetchStudentsCourse(courseId))
+        store.dispatch(fetchStudents());
+        store.dispatch(fetchStudentsCourse(courseId));
         store.dispatch(fetchInstructors());
         this.unsubscribe = store.subscribe(() => this.setState(store.getState()));
     }
@@ -28,6 +28,7 @@ export default class Coursepage extends React.Component {
         const courseId = +this.props.match.params.classId;
         console.log('hope with course ID', this.state.students);
         const course = this.state.courses.filter(course => course.id === courseId)[0];
+        const courseStudents = this.state.courseStudents
         // const students = this.state.students.filter(student=>student.courseId === courseId);
         const students = this.state.students;
         const instructors = this.state.instructors.filter(instructor => instructor.courseId === courseId);
@@ -46,7 +47,7 @@ export default class Coursepage extends React.Component {
 
                     <h3>Student List</h3>
                     {
-                        (students) && students.map(student => (
+                        (courseStudents) && courseStudents.map(student => (
                                 <div className="col-lg-6 col-md-6 col-sm-12" key={student.id}>
                                     <li>{student.name}</li>
                                 </div>

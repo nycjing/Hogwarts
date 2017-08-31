@@ -225,20 +225,24 @@ api.delete('/student/:studentId/delete', function (req, res, next) {
 //  /api/student/assign/  assign course to student
 api.put('/student/assign', function(req,res,next){
     console.log('input,',typeof req.body.studentId, typeof req.body.course);
-    Course.findOne({
-        where:{
-            id: req.body.course
-        }
-    })
+
+    Course.findById(req.body.course)
         .then((course)=>{
             console.log('show me the detail',course.name);
-            course.addStudent(req.body.studentId,{through: 'studentcourse'});
-            course.reload();
+            return course.addStudent(req.body.studentId,{through: 'studentcourse'});
+        })
+        .then(()=>{
+            return Course.findById(req.body.course);
+        })
+        .then((course)=>{
+            console.log('show me course name',course.name);
             return course.getStudents();
         })
-        .then((res) => res.data)
-        .then((students) => res.json(students))
+        .then(students => {
+            console.log('show me course students name list',students);
+            res.json({students})
 
+        })
 });
 
 // /api/students/${courseId}/course get all the student signup the course

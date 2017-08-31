@@ -11,7 +11,7 @@ import Editmember from './Editmember'
 import Instructors from './Instructors'
 import Courses from './Courses'
 import Coursepage from './Coursepage'
-import store, {fetchHouses, fetchCourses, fetchStudents, fetchInstructors} from '../store';
+import store, {fetchHouses, fetchCourses, fetchStudents, fetchInstructors, fetchStudentsCourse} from '../store';
 
 export default class Main extends React.Component {
     componentDidMount() {
@@ -19,6 +19,7 @@ export default class Main extends React.Component {
         store.dispatch(fetchCourses());
         store.dispatch(fetchStudents());
         store.dispatch(fetchInstructors());
+        store.dispatch(fetchStudentsCourse(1));
     }
 
     render() {
