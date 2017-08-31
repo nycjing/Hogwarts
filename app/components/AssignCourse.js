@@ -33,12 +33,11 @@ const mapStateToProps = function (state, ownProps) {
 
 const mapDispatchToProps = function (dispatch, ownProps) {
     return {
-
         handleSubmit (evt) {
             evt.preventDefault();
             const newCourse = evt.target.course.value;
-            const { courseId } = ownProps;
-            dispatch(assignCourseToMember({ newCourse}));
+            const { memberId } = ownProps;
+            dispatch(assignCourseToMember({ newCourse, memberId}));
         }
     };
 };

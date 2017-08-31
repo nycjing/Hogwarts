@@ -20,8 +20,6 @@ api.get('/', function (req, res, next) {
     House.findAll({})
         .then(function (houses) {
             res.json({houses})
-            // res.render('index',{houses})
-            // res.render('houseList', {houses});
         })
         .catch(next);
 
@@ -41,44 +39,23 @@ api.get('/courses', function (req, res, next) {
 // /api/classes/:className render classpage.html
 api.get('/course/:courseId', function (req, res, next) {
 
-    Course.findById(req.params.courseId)
-        .then(course => res.json(course))
-        .catch(next);
+    const findStudents = Course.findById(req.params.courseId)
+        .then(course =>{
+            console.log('show me the detail',course.name);
+            return course.getStudents();
+        })
 
-    var findStudents = Student.findAll({
-
-        include: [
-            {model: Course,
-             through: StudentCourse,
-                where :{
-                courseId: req.params.courseId
-                }
-            }
-        ],
-        where :{
-            id: studentId
-        }
-    });
-
-
-    var findInstructor = Instructor.findAll({
+    const findInstructors = Instructor.findAll({
         where :{
             courseId: req.params.courseId
         }
     });
 
-
     Promise.all([findStudents, findInstructors])
         .spread(function (students, instructors) {
             res.json({students,instructors})
-            // res.render('classpage', {
-            //     className: req.params.className,
-            //     students: students,
-            //     instructors: instructors
-            // });
         })
         .catch(next);
-
 
 });
 
@@ -245,6 +222,45 @@ api.delete('/student/:studentId/delete', function (req, res, next) {
 
 });
 
+//  /api/student/assign/  assign course to student
+api.put('/student/assign', function(req,res,next){
+    console.log('input,',typeof req.body.studentId, typeof req.body.course);
+    Course.findOne({
+        where:{
+            id: req.body.course
+        }
+    })
+        .then((course)=>{
+            console.log('show me the detail',course.name);
+            course.addStudent(req.body.studentId,{through: 'studentcourse'});
+            course.reload();
+            return course.getStudents();
+        })
+        .then((res) => res.data)
+        .then((students) => res.json(students))
+
+});
+
+// /api/students/${courseId}/course get all the student signup the course
+
+api.get('/students/${courseId}/course', function(req,res,next){
+    Course.findAll({
+        where:{
+            id: req.params.courseId,
+        }
+    })
+        .then((courses)=>{
+        console.log('want to see the join table', courses);
+            return course.getStudents();
+        })
+        .then(students => {
+            console.log('kids with that class',students);
+            res.send('hahha')
+        } )
+
+});
+
+
 // /api/instructor/:instructorId/delet  delete instructor
 
 api.delete('/instructor/:instructorId/delete', function (req, res, next) {
@@ -261,5 +277,22 @@ api.delete('/instructor/:instructorId/delete', function (req, res, next) {
         .catch(next);
 
 });
+
+// /api/course/:courseId/delet  delete course
+
+api.delete('/course/:courseId/delete', function (req, res, next) {
+
+    Course.destroy({
+        where: {
+            id: req.params.courseId
+        }
+    })
+        .then(function () {
+            res.send('done');
+        })
+        .catch(next);
+
+});
+
 
 module.exports = api;

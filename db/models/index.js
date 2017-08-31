@@ -10,8 +10,8 @@ const Instructor = require('./instructor');
 const House = require('./house');
 const Course = require('./course');
 
-Student.belongsToMany(Course, {through: 'studentcourse'});
-Course.belongsToMany(Student, {through: 'studentcourse'});
+Student.belongsToMany(Course, {through: 'studentcourse',onDelete: 'cascade', hooks:true});
+Course.belongsToMany(Student, {through: 'studentcourse',onDelete: 'cascade', hooks:true});
 Instructor.belongsTo(Course);
 Student.belongsTo(House);
 Instructor.belongsTo(House);

@@ -1,36 +1,20 @@
 import React from 'react';
 import axios from 'axios';
-import {Link} from 'react-router-dom';
+import { connect } from 'react-redux';
+import { assignCourseToMember } from '../store';
 
-export default class SingleStudent extends React.Component {
-    constructor() {
-        super();
-        this.state ={
-            student: {},
-        };
+export class Editmember extends React.Component {
 
-    }
 
     componentDidMount() {
-        const studentId = this.props.match.params.studentId;
+        const studentId = props.match.params.studentId;
         console.log(studentId)
-        axios.get(`/api/students/${studentId}`)
-            .then(res => {
-                console.log(res.data);
-                return res.data
-            })
-            .then(data => {
-                console.log('will be the input---', data)
-                this.setState({
-                    student: data
-                })
-
-            });
     }
 
     render() {
-        const student = this.state.student;
-        console.log(student)
+        // const student = this.props.students.filter(student => student.id===props.match.params.studentId);
+        // const instructors = props.instructors;
+        // console.log(student, instructors)
         return (
             <div className="container">
 
@@ -40,3 +24,28 @@ export default class SingleStudent extends React.Component {
         )
     }
 }
+
+
+const mapStateToProps = function (state, ownProps) {
+    return {
+        courses: state.courses,
+        students: state.students,
+        instructors: state.instructors
+    };
+};
+
+const mapDispatchToProps = function (dispatch, ownProps) {
+    return {
+        handleSubmit (evt) {
+            evt.preventDefault();
+            const newCourse = evt.target.course.value;
+            const { memberId } = ownProps;
+            dispatch(assignCourseToMember({ newCourse, memberId}));
+        }
+    };
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Editmember);

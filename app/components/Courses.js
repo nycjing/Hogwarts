@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import store, {fetchCourses} from '../store';
+import store, {fetchCourses, deleteCourse} from '../store';
 import NewCourse from './NewCourse'
 
 export default class Courses extends React.Component {
@@ -18,6 +18,10 @@ export default class Courses extends React.Component {
     componentWillUnmount () {
         this.unsubscribe();
     }
+    handleRemove (courseId) {
+        console.log('courseId pass to the store',courseId);
+        store.dispatch(deleteCourse(courseId));
+    }
 
     render() {
         const courses = this.state.courses;
@@ -28,12 +32,19 @@ export default class Courses extends React.Component {
                 <h3>Class List</h3>
                     {
                         courses && courses.map(course=> (
-                        <li id="deleteItem" className="col-lg-8" key = {course.id}>
-                        <Link value={course.id} to="/api/class/{course}">{course.name} </Link>
-                        </li>
+                        <div>
+                            <div className="col-sm-6">
+                                <li >
+                                <Link value={course.id} key = {course.id} to={`/classes/${course.id}`}>{course.name} </Link>
+                                </li>
+                            </div>
+                            <input className="col-cm-1" onClick={()=> this.handleRemove(course.id)} type='button' value='x'/>
+                        </div>
                         ))
                     }
+                    <div>
                     <NewCourse />
+                    </div>
             </div>
         )
     }

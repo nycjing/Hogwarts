@@ -1,9 +1,3 @@
-import { createStore, applyMiddleware } from 'redux';
-// import rootReducer from './reducers';
-import createLogger from 'redux-logger'; // https://github.com/evgenyrodionov/redux-logger
-import thunkMiddleware from 'redux-thunk'; // https://github.com/gaearon/redux-thunk
-import { composeWithDevTools } from 'redux-devtools-extension';
-
 import axios from 'axios';
 
 //ACTION TYPES
@@ -64,8 +58,8 @@ export function fetchStudentsCourse(courseId){
         return axios.get(`/api/course/${courseId}`)
             .then(res => res.data)
             .then(({students, instructors}) => {
-                console.log('get back from fron',students, instructors);
-                dispatch(gotStudentsFromServer(students))
+                console.log('get back from fron',students);
+                // dispatch(gotStudentsFromServer(students))
             });
     }
 }
@@ -74,12 +68,12 @@ export function deleteStudent (studentId) {
     return function thunk (dispatch) {
 
         console.log('studentId in  the store',`/api/student/${studentId}/delete`)
-         return   axios.delete(`/api/student/${studentId}/delete`)
-                .then( ()=> {
-                    dispatch(removeStudent(studentId))
-                })
-                .catch(err => console.error(err));
-        }
+        return   axios.delete(`/api/student/${studentId}/delete`)
+            .then( ()=> {
+                dispatch(removeStudent(studentId))
+            })
+            .catch(err => console.error(err));
+    }
 }
 
 export function fetchInstructors () {
@@ -205,7 +199,8 @@ export function gotStudentsWithCourse (){
     }
 }
 
-const rootReducer = function(state = initialState, action) {
+// REDUCER
+export default reducer = = function(state = initialState, action) {
     switch(action.type) {
         case GET_HOUSES:
             return Object.assign({}, state, {houses: action.houses});
@@ -230,6 +225,3 @@ const rootReducer = function(state = initialState, action) {
         default: return state
     }
 };
-
-
-export default createStore(rootReducer, composeWithDevTools(applyMiddleware(thunkMiddleware, createLogger())))

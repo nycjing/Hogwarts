@@ -19,39 +19,11 @@ export default class Instructors extends React.Component {
         this.unsubscribe();
     }
 
-    handleRemove (instructorId) {
+    static handleRemove (instructorId) {
         console.log('studentId pass to the store',instructorId);
         store.dispatch(deleteInstructor(instructorId));
     }
-    // constructor() {
-    //     super();
-    //     this.state = {
-    //         instructors: [],
-    //     };
-    //     this.handleRemove = this.handleRemove.bind(this)
-    // }
-    //
-    // componentDidMount() {
-    //     axios.get(`/api/instructors`)
-    //         .then(res => {
-    //             return res.data
-    //         })
-    //         .then(data => {
-    //             this.setState({
-    //                 instructors: data,
-    //             })
-    //         });
-    // }
-    //
-    // handleRemove (instructorId) {
-    //     axios.delete(`/api/instructor/${instructorId}/delete`)
-    //         .then( ()=> {
-    //             return this.setState({
-    //                 instructors: this.state.instructors.filter(instructor => instructor.id !== instructorId)
-    //             })
-    //         })
-    //         .catch(err => console.error(err));
-    // }
+
 
     render() {
         const instructors = this.state.instructors;
@@ -79,7 +51,7 @@ export default class Instructors extends React.Component {
                                 <span>{ instructor.course.name }</span>
                             </td>
                             <td>
-                                <input onClick={()=> this.handleRemove(instructor.id)} type='button' value='x'/>
+                                <input onClick={()=> Instructors.handleRemove(instructor.id)} type='button' value='x'/>
                             </td>
                         </tr>
                     ))

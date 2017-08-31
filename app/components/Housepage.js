@@ -22,7 +22,6 @@ export default class Housepage extends React.Component {
                 return res.data
             })
             .then(data => {
-                console.log('will be the input---', data)
                 this.setState({
                     house: data.house,
                     students: data.students,

@@ -9,9 +9,9 @@ export default class Addmember extends React.Component {
             name:   '',
             email:  '',
             age:    11,
-            gender: '',
+            gender: 'Male',
             dbtable: '',
-            house: '',
+            house: 'Gryffindor',
             houses: [],
         };
         this.handleChange = this.handleChange.bind(this);
@@ -35,28 +35,24 @@ export default class Addmember extends React.Component {
     handleSubmit (evt) {
         evt.preventDefault();
         const inputbody = this.state;
-        console.log('-----input---',inputbody);
         axios.post(`/api/`, inputbody)
             .then(res => {
-                console.log(res.data);
                 return res.data
             })
             .then(data => {
-                console.log('will be the input---', data);
                 this.setState({
                     house: data.house,
                     students: data.students,
                     instructors: data.instructors
                 })
-
             });
         this.setState({
             name:   '',
             email:  '',
             age:    11,
-            gender: '',
+            gender: 'Male',
             dbtable: '',
-            house: '',
+            house: 'Gryffindor',
             houses: [],
         });
     }
@@ -72,13 +68,13 @@ export default class Addmember extends React.Component {
                 <div className="form-group">
                     <label className="col-sm-2 control-label">Name</label>
                     <div className="col-sm-10">
-                        <input name="name" type="text" className="form-control" value={this.state.name} onChange={this.handleChange}/>
+                        <input name="name" type="text" className="form-control" value={this.state.name} required onChange={this.handleChange}/>
                     </div>
                 </div>
                 <div className="form-group">
                     <label className="col-sm-2 control-label">Email</label>
                     <div className="col-sm-10">
-                        <input name="email" type="text" className="form-control" value={this.state.email} onChange={this.handleChange}/>
+                        <input name="email" type="text" className="form-control" value={this.state.email} required onChange={this.handleChange}/>
                     </div>
                 </div>
                 <div className="form-group">
@@ -112,7 +108,7 @@ export default class Addmember extends React.Component {
                  <div className="form-group">
                     <div className="col-sm-10">
                     <label className="col-sm-2 control-label">Add: </label>
-                        <input type="radio" name="dbtable" value="student" checked onChange={this.handleChange}/> Student
+                        <input type="radio" name="dbtable" value="student" onChange={this.handleChange}/> Student
                         <input type="radio" name="dbtable" value="instructor" onChange={this.handleChange}/> Instructor <br/>
                     </div>
                 </div>

@@ -10,6 +10,7 @@ import Students from './Students'
 import Editmember from './Editmember'
 import Instructors from './Instructors'
 import Courses from './Courses'
+import Coursepage from './Coursepage'
 import store, {fetchHouses, fetchCourses, fetchStudents, fetchInstructors} from '../store';
 
 export default class Main extends React.Component {
@@ -36,9 +37,9 @@ export default class Main extends React.Component {
                                 <Route exact path="/students" component={Students} />
                                 <Route path="/students/:studentId" component={Editmember} />
                                 <Route exact path="/instructors" component={Instructors} />} />
-                                <Route path="/api/instructors/:instructorId" component={Editmember} />
+                                <Route path="/instructors/:instructorId" component={Editmember} />
                                 <Route exact path="/classes/" component={Courses} />
-                                <Route path="/classes/:classId" component={Courses} />
+                                <Route path="/classes/:classId" component={Coursepage} />
                             </Switch>
                         </div>
 
