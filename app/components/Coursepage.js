@@ -39,7 +39,7 @@ export default class Coursepage extends React.Component {
                 <div className="row">
 
                         {(course) && (
-                            <div className="col-lg-4 col-md-6 col-sm-12" key={course.id}>
+                            <div className="col-lg-6 col-md-12 col-sm-12" key={course.id}>
                             <h3>{course.name}</h3>
                             <img src={`/img/class.jpg`} name={course.name} height="300" width="300"/>
                             </div>
@@ -48,7 +48,7 @@ export default class Coursepage extends React.Component {
                     <h3>Student List</h3>
                     {
                         (courseStudents) && courseStudents.map(student => (
-                                <div className="col-lg-6 col-md-6 col-sm-12" key={student.id}>
+                                <div className="col-lg-6 col-md-12 col-sm-12" key={student.id}>
                                     <li>{student.name}</li>
                                 </div>
                             )
@@ -58,7 +58,7 @@ export default class Coursepage extends React.Component {
                     <h3>Instructor</h3>
                     {
                         (instructors) && instructors.map(instructor => (
-                                <div className="col-lg-6 col-md-6 col-sm-12" key={instructor.id}>
+                                <div className="col-lg-6 col-md-12 col-sm-12" key={instructor.id}>
                                     <li>{instructor.name}</li>
                                 </div>
                             )
