@@ -1,7 +1,9 @@
 import React from 'react';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
-import store, {fetchInstructors, deleteInstructor } from '../store';
+// import store, {fetchInstructors, deleteInstructor } from '../store';
+import {fetchInstructors, deleteInstructor } from '../reducers';
+import store from '../store';
 
 export default class Instructors extends React.Component {
 
@@ -26,7 +28,7 @@ export default class Instructors extends React.Component {
 
 
     render() {
-        const instructors = this.state.instructors;
+        const instructors = this.state.instructors.instructors;
         console.log(instructors);
         return (
             <div className="container">

@@ -1,14 +1,14 @@
 import { combineReducers } from 'redux'
-import house from './house';
-import course from './course';
-import student from './student';
-import instructor from './instructor'
+import houses from './house';
+import courses from './course';
+import students from './student';
+import instructors from './instructor'
 
 const rootReducer = combineReducers({
-    house,
-    course,
-    student,
-    instructor
+houses,
+courses,
+students,
+instructors
 });
 
 export default rootReducer

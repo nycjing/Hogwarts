@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from 'axios';
-import store, {fetchInstructors, fetchCourses, fetchHouses } from '../store';
+// import store, {fetchInstructors, fetchCourses, fetchHouses } from '../store';
+import {fetchInstructors, fetchCourses, fetchHouses } from '../reducers';
+import store from '../store';
 
 
 export default class Coursepage extends React.Component {
@@ -22,9 +24,9 @@ export default class Coursepage extends React.Component {
 
     render() {
         const instructorId = +this.props.match.params.instructorId;
-        const instructor = this.state.instructors.filter(instructor => instructor.id === instructorId)[0];
-        const house = this.state.houses.filter(house => house.id === instructor.houseId)[0];
-        const course = this.state.courses.filter(course => course.id === instructor.courseId)[0];
+        const instructor = this.state.instructors.instructors.filter(instructor => instructor.id === instructorId)[0];
+        const house = this.state.houses.houses.filter(house => house.id === instructor.houseId)[0];
+        const course = this.state.courses.courses.filter(course => course.id === instructor.courseId)[0];
               return (
             <div className="container">
                 <h3>Instructor detail Page</h3>

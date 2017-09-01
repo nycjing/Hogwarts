@@ -1,6 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import store, {fetchStudents, deleteStudent } from '../store';
+// import store, {fetchStudents, deleteStudent } from '../store';
+import {fetchStudents, deleteStudent } from '../reducers';
+import store from '../store';
 
 export default class Students extends React.Component {
 
@@ -25,7 +27,7 @@ export default class Students extends React.Component {
     }
 
     render() {
-        const students = this.state.students;
+        const students = this.state.students.students;
 
         return (
             <div className="container">

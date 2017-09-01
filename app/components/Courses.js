@@ -1,6 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import store, {fetchCourses, deleteCourse} from '../store';
+// import store, {fetchCourses, deleteCourse} from '../store';
+import store from '../store';
+import {fetchCourses, deleteCourse} from '../reducers'
 import NewCourse from './NewCourse'
 
 export default class Courses extends React.Component {
@@ -24,7 +26,7 @@ export default class Courses extends React.Component {
     }
 
     render() {
-        const courses = this.state.courses;
+        const courses = this.state.courses.courses;
         console.log('course list',courses);
         return (
             <div className="container">

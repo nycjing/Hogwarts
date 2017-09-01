@@ -1,8 +1,9 @@
 import React from 'react';
 import axios from 'axios';
 import AssignCourse from './AssignCourse';
-import store, {fetchStudents, fetchCourses, fetchHouses ,fetchCoursesStudent,removeCourseStudent} from '../store';
-
+// import store, {fetchStudents, fetchCourses, fetchHouses ,fetchCoursesStudent,removeCourseStudent} from '../store';
+import {fetchStudents, fetchCourses, fetchHouses ,fetchCoursesStudent,removeCourseStudent } from '../reducers';
+import store from '../store';
 
 export default class Studentpage extends React.Component {
     constructor() {
@@ -30,11 +31,11 @@ export default class Studentpage extends React.Component {
 
     render() {
         const studentId = +this.props.match.params.studentId;
-        const studentCourses = this.state.studentCourses
+        const studentCourses = this.state.courses.studentCourses
         console.log('student courses',studentCourses )
-        const student = this.state.students.filter(student => student.id === studentId)[0];
-        const house = this.state.houses.filter(house => house.id === student.houseId)[0];
-        const courses = this.state.courses;
+        const student = this.state.students.students.filter(student => student.id === studentId)[0];
+        const house = this.state.houses.houses.filter(house => house.id === student.houseId)[0];
+        const courses = this.state.courses.courses;
         return (
             <div className="container">
                 <h3>Student detail Page</h3>

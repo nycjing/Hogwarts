@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { postCourseToServer, writeCourse } from '../store';
+// import { postCourseToServer, writeCourse } from '../store';
+import { postCourseToServer, writeCourse } from '../reducers';
 
 function NewCourse (props) {
 
@@ -26,12 +27,12 @@ function NewCourse (props) {
 
 const mapStateToProps = function (state, ownProps) {
     return {
-        newCourseEntry: state.newCourseEntry,
-        name: state.name
+        newCourseEntry: state.courses.newCourseEntry,
+
     };
 };
 
-const mapDispatchToProps = function (dispatch, ownProps) {
+const mapDispatchToProps = function (dispatch) {
     return {
         handleChange (evt) {
             dispatch(writeCourse(evt.target.value));
@@ -39,7 +40,6 @@ const mapDispatchToProps = function (dispatch, ownProps) {
         handleSubmit (evt) {
             evt.preventDefault();
             const newCourse = evt.target.courseName.value;
-            const { courseId } = ownProps;
             dispatch(postCourseToServer({ newCourse}));
         }
     };

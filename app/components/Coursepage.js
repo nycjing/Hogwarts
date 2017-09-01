@@ -1,8 +1,10 @@
 import React from 'react';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
-import store, { fetchCourses, fetchInstructors, fetchStudents,fetchStudentsCourse,removeStudentCourse } from '../store';
+// import store, { fetchCourses, fetchInstructors, fetchStudents,fetchStudentsCourse,removeStudentCourse } from '../store';
 import AssignStudent from './AssignStudent';
+import store from '../store';
+import {fetchCourses, fetchInstructors, fetchStudents,fetchStudentsCourse,removeStudentCourse } from '../reducers'
 
 
 export default class Coursepage extends React.Component {
@@ -30,12 +32,10 @@ export default class Coursepage extends React.Component {
 
     render() {
         const courseId = +this.props.match.params.classId;
-        console.log('hope with course ID', this.state.students);
-        const course = this.state.courses.filter(course => course.id === courseId)[0];
-        const courseStudents = this.state.courseStudents
-        // const students = this.state.students.filter(student=>student.courseId === courseId);
-        const students = this.state.students;
-        const instructors = this.state.instructors.filter(instructor => instructor.courseId === courseId);
+        const course = this.state.courses.courses.filter(course => course.id === courseId)[0];
+        const courseStudents = this.state.courses.courseStudents
+        const students = this.state.students.students;
+        const instructors = this.state.instructors.instructors.filter(instructor => instructor.courseId === courseId);
         console.log(course, students, instructors.length);
         return (
             <div className="container">

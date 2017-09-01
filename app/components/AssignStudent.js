@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { assignCourseToStudent } from '../store';
+import { assignCourseToStudent } from '../reducers';
 
 function AssignStudent (props) {
 
@@ -27,7 +27,7 @@ function AssignStudent (props) {
 
 const mapStateToProps = function (state, ownProps) {
     return {
-        students: state.students
+        students: state.students.students
     };
 };
 
