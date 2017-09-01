@@ -7,11 +7,12 @@ import Hogwarts from './Hogwarts'
 import Housepage from './Housepage'
 import Addmember from './Addmember'
 import Students from './Students'
-import Editmember from './Editmember'
+import Studentpage from './Studentpage'
 import Instructors from './Instructors'
+import Instructorpage from './Instructorpage'
 import Courses from './Courses'
 import Coursepage from './Coursepage'
-import store, {fetchHouses, fetchCourses, fetchStudents, fetchInstructors, fetchStudentsCourse} from '../store';
+import store, {fetchHouses, fetchCourses, fetchStudents, fetchInstructors, fetchStudentsCourse, fetchCoursesStudent} from '../store';
 
 export default class Main extends React.Component {
     componentDidMount() {
@@ -20,6 +21,7 @@ export default class Main extends React.Component {
         store.dispatch(fetchStudents());
         store.dispatch(fetchInstructors());
         store.dispatch(fetchStudentsCourse(1));
+        store.dispatch(fetchCoursesStudent(1));
     }
 
     render() {
@@ -36,9 +38,9 @@ export default class Main extends React.Component {
                                 <Route path="/house/:houseId" component={Housepage} />
                                 <Route path="/add" component={Addmember} />
                                 <Route exact path="/students" component={Students} />
-                                <Route path="/students/:studentId" component={Editmember} />
+                                <Route path="/students/:studentId" component={Studentpage} />
                                 <Route exact path="/instructors" component={Instructors} />} />
-                                <Route path="/instructors/:instructorId" component={Editmember} />
+                                <Route path="/instructors/:instructorId" component={Instructorpage} />
                                 <Route exact path="/classes/" component={Courses} />
                                 <Route path="/classes/:classId" component={Coursepage} />
                             </Switch>

@@ -29,7 +29,7 @@ const initialState = {
     instructors : [],
     newCourseEntry : '',
     studentCourses : [],
-    courseStudents : [],
+    courseStudents : []
 };
 
 export function fetchHouses () {
@@ -69,6 +69,17 @@ export function fetchStudentsCourse(courseId){
             .then(({students, instructors}) => {
                 console.log('get back from fron',students, instructors);
                 dispatch(gotStudentsOneCourse(students))
+            });
+    }
+}
+
+export function fetchCoursesStudent(studentId){
+    return function thunk (dispatch) {
+        return axios.get(`/api/courses/student/${studentId}`)
+            .then(res => res.data)
+            .then(({courses}) => {
+                console.log('what I got?',courses);
+                dispatch(gotCoursesOneStudent(courses));
             });
     }
 }
@@ -133,12 +144,37 @@ export function assignCourseToStudent (studentId, course){
         const body = {studentId, course}
         return axios.put('/api/student/assign', body)
             .then(res=>res.data)
+            .then(({students,courses})=>{
+                console.log('update student, course', students, courses)
+                dispatch(gotStudentsOneCourse(students))
+                dispatch(gotCoursesOneStudent(courses))
+            })
+    }
+
+}
+
+export function removeStudentCourse(studentId,courseId){
+    return function thunk (dispatch){
+        const body = {studentId, courseId}
+        return axios.put('/api/student/remove', body)
+            .then(res=>res.data)
             .then(({students})=>{
                 console.log('update student', students)
                 dispatch(gotStudentsOneCourse(students))
             })
     }
+}
 
+export function removeCourseStudent(studentId,courseId){
+    return function thunk (dispatch){
+        const body = {studentId, courseId}
+        return axios.put('/api/course/remove', body)
+            .then(res=>res.data)
+            .then(({courses})=>{
+                console.log('update course', courses)
+                dispatch(gotCoursesOneStudent(courses))
+            })
+    }
 }
 
 export function gotHousesFromServer (houses) {
@@ -209,6 +245,13 @@ export function gotStudentsOneCourse (courseStudents){
     }
 }
 
+export function gotCoursesOneStudent(studentCourses) {
+    return{
+        type: GOT_STUDENT_COURSE,
+        studentCourses
+    }
+}
+
 const rootReducer = function(state = initialState, action) {
     switch(action.type) {
         case GET_HOUSES:
@@ -233,6 +276,8 @@ const rootReducer = function(state = initialState, action) {
             return Object.assign({},state,{courses: state.courses.filter(course=> course.id !== action.courseId)});
         case GOT_COURSE_STUDENT:
             return Object.assign({}, state, {courseStudents : action.courseStudents});
+        case GOT_STUDENT_COURSE:
+            return Object.assign({}, state, {studentCourses : action.studentCourses});
         default: return state
     }
 };

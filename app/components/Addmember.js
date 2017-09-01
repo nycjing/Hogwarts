@@ -12,7 +12,9 @@ export default class Addmember extends React.Component {
             gender: 'Male',
             dbtable: '',
             house: 'Gryffindor',
+            course: '',
             houses: [],
+            courses:[],
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -22,6 +24,11 @@ export default class Addmember extends React.Component {
         axios.get('/api/')
             .then(res => res.data)
             .then(data => this.setState({houses:data.houses}));
+        axios.get('/api/courses')
+            .then(res => res.data.courses)
+            .then(courses => {
+                this.setState({courses:courses})
+            });
     }
 
     handleChange (evt) {
@@ -36,9 +43,7 @@ export default class Addmember extends React.Component {
         evt.preventDefault();
         const inputbody = this.state;
         axios.post(`/api/`, inputbody)
-            .then(res => {
-                return res.data
-            })
+            .then(res => res.data)
             .then(data => {
                 this.setState({
                     house: data.house,
@@ -53,12 +58,13 @@ export default class Addmember extends React.Component {
             gender: 'Male',
             dbtable: '',
             house: 'Gryffindor',
-            houses: [],
+            course: ''
         });
     }
 
     render() {
         const houses = this.state.houses;
+        const courses = this.state.courses;
         return (
             <div className="container">
                 <h3>Add a member</h3>
@@ -88,7 +94,7 @@ export default class Addmember extends React.Component {
                     <div className="col-sm-10">
                         <select className="form-control" name="house" value={this.state.house} onChange={this.handleChange}>
                             {
-                                this.state.houses.map(house => (
+                                houses.map(house => (
                                     <option value={house.name} key={house.id}>{house.name}</option>
                                 ))
 
@@ -96,6 +102,18 @@ export default class Addmember extends React.Component {
                         </select>
                     </div>
                 </div>
+                 <div className="form-group">
+                     <label className="col-sm-2 control-label">Course</label>
+                     <div className="col-sm-10">
+                         <select className="form-control" name="course" onChange={this.handleChange}>
+                             {
+                                 courses.map(course => (
+                                     <option value={course.id} key={course.id}>{course.name}</option>
+                                 ))
+                             }
+                         </select>
+                     </div>
+                 </div>
                 <div className="form-group">
                     <label className="col-sm-2 control-label">Gender</label>
                     <div className="col-sm-10">
@@ -118,7 +136,6 @@ export default class Addmember extends React.Component {
             </section>
 
             </form>
-            <AssignCourse />
             </div>
         )
     }

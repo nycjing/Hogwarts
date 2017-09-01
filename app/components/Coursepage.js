@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
-import store, { fetchCourses, fetchInstructors, fetchStudents,fetchStudentsCourse } from '../store';
+import store, { fetchCourses, fetchInstructors, fetchStudents,fetchStudentsCourse,removeStudentCourse } from '../store';
 import AssignStudent from './AssignStudent';
 
 
@@ -23,6 +23,10 @@ export default class Coursepage extends React.Component {
     componentWillUnmount () {
         this.unsubscribe();
     }
+    handleRemove (studentId, courseId) {
+        console.log('courseId pass to the store',courseId);
+        store.dispatch(removeStudentCourse(studentId,courseId));
+    }
 
     render() {
         const courseId = +this.props.match.params.classId;
@@ -39,31 +43,34 @@ export default class Coursepage extends React.Component {
                 <div className="row">
 
                         {(course) && (
-                            <div className="col-lg-6 col-md-12 col-sm-12" key={course.id}>
+                            <div className="col-lg-6 col-md-6 col-sm-6" key={course.id}>
                             <h3>{course.name}</h3>
                             <img src={`/img/class.jpg`} name={course.name} height="300" width="300"/>
                             </div>
                         )}
-
-                    <h3>Student List</h3>
-                    {
-                        (courseStudents) && courseStudents.map(student => (
-                                <div className="col-lg-6 col-md-12 col-sm-12" key={student.id}>
-                                    <li>{student.name}</li>
-                                </div>
-                            )
-                        )
-                    }
-                    <AssignStudent course = {courseId}/>
                     <h3>Instructor</h3>
                     {
                         (instructors) && instructors.map(instructor => (
-                                <div className="col-lg-6 col-md-12 col-sm-12" key={instructor.id}>
+                                <div className="col-lg-6 col-md-6 col-sm-6" key={instructor.id}>
                                     <li>{instructor.name}</li>
                                 </div>
                             )
                         )
                     }
+
+                    <h3>Class student list</h3>
+                    {
+                        (courseStudents) && courseStudents.map(student => (
+                            <div key={student.id}>
+                                <div className="col-lg-5 col-md-5 col-sm-5" >
+                                    <li>{student.name}</li>
+                                </div>
+                                <input className="col-cm-1" onClick={()=> this.handleRemove(student.id, courseId)} type='button' value='x'/>
+                            </div>
+                            )
+                        )
+                    }
+                    <AssignStudent course = {courseId}/>
                 </div>
             </div>
 

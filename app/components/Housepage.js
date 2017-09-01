@@ -35,7 +35,6 @@ export default class Housepage extends React.Component {
         const house = this.state.house;
         const students = this.state.students;
         const instructors = this.state.instructors;
-        console.log(house, students, instructors.length);
         return (
             <div className="container">
                 <h3>Single House Page</h3>
@@ -64,8 +63,6 @@ export default class Housepage extends React.Component {
                 }
             </div>
             </div>
-
         )
     }
-
 }

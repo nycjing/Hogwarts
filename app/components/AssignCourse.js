@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { assignCourseToMember } from '../store';
+import { assignCourseToStudent } from '../store';
 
 function AssignCourse (props) {
 
@@ -13,7 +13,7 @@ function AssignCourse (props) {
                     <select className="form-control" name="course">
                         {
                             props.courses.map(course => (
-                                <option value={course.name} key={course.id}>{course.name}</option>
+                                <option value={course.id} key={course.id}>{course.name}</option>
                             ))
                         }
                     </select>
@@ -35,9 +35,11 @@ const mapDispatchToProps = function (dispatch, ownProps) {
     return {
         handleSubmit (evt) {
             evt.preventDefault();
-            const newCourse = evt.target.course.value;
-            const { memberId } = ownProps;
-            dispatch(assignCourseToMember({ newCourse, memberId}));
+            const course = +evt.target.course.value;
+            const studentId = ownProps.student;
+            console.log('send to backend data', studentId, course, typeof course, ownProps);
+            dispatch(assignCourseToStudent(studentId, course));
+
         }
     };
 };

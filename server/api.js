@@ -74,12 +74,9 @@ api.post('/courses', function (req, res, next) {
 });
 
 
-
-
 // /api/instructors render instructorList.html
 
 api.get('/instructors/', function (req, res, next) {
-    // res.send('list student')
     Instructor.findAll({
         include: [
             {model: House},
@@ -88,7 +85,6 @@ api.get('/instructors/', function (req, res, next) {
     })
         .then(function (instructors) {
             res.json(instructors)
-            // res.render('instructorList', {instructors: instructors});
         })
         .catch(next);
 
@@ -105,7 +101,6 @@ api.get('/students/', function (req, res, next) {
     })
         .then(function (students) {
             res.json(students)
-           // res.render('studentList', {students: students});
         })
         .catch(next);
 
@@ -123,7 +118,6 @@ api.get('/add', function (req, res, next) {
     House.findAll({})
         .then(function (houses) {
             res.json(houses)
-            // res.render('addstudent.html', {houses});
         })
         .catch(next);
 });
@@ -151,7 +145,8 @@ api.post('/', function (req, res, next) {
 
                 var newStudent = Student.build(member);
                 newStudent.save()
-                    .then(function () {
+                    .then(()=> {
+                        newStudent.addCourse(req.body.course);
                         res.json(newStudent)
                     })
                     .catch(next)}
@@ -161,7 +156,8 @@ api.post('/', function (req, res, next) {
                     email: req.body.email,
                     age: req.body.age,
                     gender: req.body.gender,
-                    houseId: house.id
+                    houseId: house.id,
+                    courseId: req.body.course
                 };
                 console.log(member);
 
@@ -206,48 +202,64 @@ api.get('/house/:houseId', function (req, res, next) {
 
 });
 
-// /api/student/:studentId/delet  delete student
-api.delete('/student/:studentId/delete', function (req, res, next) {
-    console.log(req.params.studentId);
-    Student.destroy({
-        where: {
-            id: req.params.studentId
-        }
-    })
-        .then(function () {
-            // res.send('/api');
-            res.send('done');
-        })
-        .catch(next);
 
-});
 
 //  /api/student/assign/  assign course to student
 api.put('/student/assign', function(req,res,next){
     console.log('input,',typeof req.body.studentId, typeof req.body.course);
-
+    const findStudents = Course.findById(req.body.course).then(course=>{return course.getStudents()});
+    const findCourses = Student.findById(req.body.studentId).then(student=>{return student.getCourses()});
     Course.findById(req.body.course)
         .then((course)=>{
-            console.log('show me the detail',course.name);
             return course.addStudent(req.body.studentId,{through: 'studentcourse'});
         })
         .then(()=>{
-            return Course.findById(req.body.course);
+           return Promise.all([findStudents, findCourses])
+        })
+        .spread(function (students, courses) {
+            res.json({students,courses})
+        })
+        .catch(next);
+});
+
+//  /api/student/remove/  remove student from course
+api.put('/student/remove', function(req,res,next){
+
+    Course.findById(req.body.courseId)
+        .then((course)=>{
+            return course.removeStudent(req.body.studentId,{through: 'studentcourse'});
+        })
+        .then(()=>{
+            return Course.findById(req.body.courseId)
         })
         .then((course)=>{
-            console.log('show me course name',course.name);
             return course.getStudents();
         })
         .then(students => {
-            console.log('show me course students name list',students);
             res.json({students})
-
         })
 });
 
-// /api/students/${courseId}/course get all the student signup the course
+//  /api/student/remove/  remove course from student
+api.put('/course/remove', function(req,res,next){
+    console.log(req.body.studentId,req.body.courseId )
+    Student.findById(req.body.studentId)
+        .then((student)=>{
+            return student.removeCourse(req.body.courseId,{through: 'studentcourse'});
+        })
+        .then(()=>{
+            return Student.findById(req.body.studentId)
+        })
+        .then((student)=>{
+            return student.getCourses();
+        })
+        .then(courses => {
+            res.json({courses})
+        })
+});
+// /api/students/${courseId}/course get all the student signup to one course
 
-api.get('/students/${courseId}/course', function(req,res,next){
+api.get('/students/:courseId/course', function(req,res,next){
     Course.findAll({
         where:{
             id: req.params.courseId,
@@ -257,10 +269,26 @@ api.get('/students/${courseId}/course', function(req,res,next){
         console.log('want to see the join table', courses);
             return course.getStudents();
         })
-        .then(students => {
+        .then((students) => {
             console.log('kids with that class',students);
-            res.send('hahha')
+            res.json({students})
         } )
+
+});
+
+// /api/courses/${studentId}/student get all the courses signup to one student
+
+api.get('/courses/student/:studentId', function(req,res,next){
+   const findCourses = Student.findById(req.params.studentId)
+        .then(student=>{
+            console.log('who is this kid?',student.name);
+            return student.getCourses();
+        })
+        .then((courses) => {
+            console.log('kids with that classes',{courses});
+            res.json({courses})
+        })
+       .catch(next);
 
 });
 
@@ -292,6 +320,22 @@ api.delete('/course/:courseId/delete', function (req, res, next) {
         }
     })
         .then(function () {
+            res.send('done');
+        })
+        .catch(next);
+
+});
+
+// /api/student/:studentId/delet  delete student
+api.delete('/student/:studentId/delete', function (req, res, next) {
+    console.log(req.params.studentId);
+    Student.destroy({
+        where: {
+            id: req.params.studentId
+        }
+    })
+        .then(function () {
+            // res.send('/api');
             res.send('done');
         })
         .catch(next);

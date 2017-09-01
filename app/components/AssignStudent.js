@@ -8,8 +8,8 @@ function AssignStudent (props) {
         <form id="new-message-form" onSubmit={props.handleSubmit}>
 
             <div className="form-group">
-                <label className="col-sm-2 control-label">Add Student</label>
-                <div className="col-sm-9">
+                <label className="col-sm-1 control-label">Add Student</label>
+                <div className="col-sm-5">
                     <select className="form-control" name="student">
                         {
                             props.students.map(student => (
