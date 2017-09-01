@@ -27,7 +27,7 @@ export function gotHousesFromServer (houses) {
 
 
 // REDUCER
-export default reducer = function(state = initialState, action) {
+export default function reducer (state = initialState, action) {
     switch(action.type) {
         case GET_HOUSES:
             return Object.assign({}, state, {houses: action.houses});

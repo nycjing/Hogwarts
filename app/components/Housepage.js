@@ -39,7 +39,7 @@ export default class Housepage extends React.Component {
             <div className="container">
                 <h3>Single House Page</h3>
             <div className="row">
-                <div className="col-lg-4 col-md-6 col-sm-12" key={house.id}>
+                <div className="col-lg-6 col-md-6 col-sm-12" key={house.id}>
                     <h3>{house.name}</h3>
                     <img src={`/img/${house.name}.jpg`} name={house.name} height="300" width="300"/>
                 </div>

@@ -207,13 +207,13 @@ api.get('/house/:houseId', function (req, res, next) {
 //  /api/student/assign/  assign course to student
 api.put('/student/assign', function(req,res,next){
     console.log('input,',typeof req.body.studentId, typeof req.body.course);
-    const findStudents = Course.findById(req.body.course).then(course=>{return course.getStudents()});
-    const findCourses = Student.findById(req.body.studentId).then(student=>{return student.getCourses()});
     Course.findById(req.body.course)
         .then((course)=>{
             return course.addStudent(req.body.studentId,{through: 'studentcourse'});
         })
         .then(()=>{
+            const findStudents = Course.findById(req.body.course).then(course=>{return course.getStudents()});
+            const findCourses = Student.findById(req.body.studentId).then(student=>{return student.getCourses()});
            return Promise.all([findStudents, findCourses])
         })
         .spread(function (students, courses) {

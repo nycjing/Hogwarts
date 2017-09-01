@@ -88,12 +88,12 @@ export function deleteStudent (studentId) {
     return function thunk (dispatch) {
 
         console.log('studentId in  the store',`/api/student/${studentId}/delete`)
-         return   axios.delete(`/api/student/${studentId}/delete`)
-                .then( ()=> {
-                    dispatch(removeStudent(studentId))
-                })
-                .catch(err => console.error(err));
-        }
+        return   axios.delete(`/api/student/${studentId}/delete`)
+            .then( ()=> {
+                dispatch(removeStudent(studentId))
+            })
+            .catch(err => console.error(err));
+    }
 }
 
 export function fetchInstructors () {
@@ -282,5 +282,5 @@ const rootReducer = function(state = initialState, action) {
     }
 };
 
-// export * from './reducers';
+
 export default createStore(rootReducer, composeWithDevTools(applyMiddleware(thunkMiddleware, createLogger())))

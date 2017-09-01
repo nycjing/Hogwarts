@@ -1,6 +1,7 @@
 # Senior Enrichment Project
 
-Make a thing!
+I made a Hogwarts website. https://youtu.be/ouLjnxLwSKo
+You can take a vedio tour at:  https://youtu.be/ouLjnxLwSKo
 
 ## Getting started
 

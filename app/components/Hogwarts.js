@@ -1,6 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import store, {fetchHouses} from '../store';
+// import {fetchHouses} from '../reducers';
+// import store from '../store';
 
 
 export default class Hogwarts extends React.Component {

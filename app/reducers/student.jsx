@@ -53,7 +53,7 @@ export function removeStudent (studentId) {
 
 
 // REDUCER
-export default reducer = function(state = initialState, action) {
+export default function reducer (state = initialState, action) {
     switch(action.type) {
         case GET_STUDENTS:
             return Object.assign({}, state, {students: action.students});

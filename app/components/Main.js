@@ -13,6 +13,11 @@ import Instructorpage from './Instructorpage'
 import Courses from './Courses'
 import Coursepage from './Coursepage'
 import store, {fetchHouses, fetchCourses, fetchStudents, fetchInstructors, fetchStudentsCourse, fetchCoursesStudent} from '../store';
+// import {fetchHouses, fetchCourses, fetchStudents, fetchInstructors, fetchStudentsCourse, fetchCoursesStudent} from '../reducers';
+// import store from '../store';
+
+
+
 
 export default class Main extends React.Component {
     componentDidMount() {

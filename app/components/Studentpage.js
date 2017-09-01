@@ -41,7 +41,7 @@ export default class Studentpage extends React.Component {
                 <div className="row">
 
                     {(student) && (house) && (
-                        <div className="col-lg-6 col-md-12 col-sm-12" key={student.id}>
+                        <div className="col-lg-6 col-md-6 col-sm-12" key={student.id}>
                             <h3>{student.name}</h3>
                             <li>Email: {student.email}</li>
                             <li>Age: {student.age}</li>
@@ -51,6 +51,7 @@ export default class Studentpage extends React.Component {
                     )}
 
                     <h4>Sign up Class</h4>
+
                     {(studentCourses) && studentCourses.map(course => (
                             <div key={course.id}>
                                 <div className="col-lg-5 col-md-5 col-sm-5" >
@@ -59,8 +60,12 @@ export default class Studentpage extends React.Component {
                                 <input className="col-cm-1" onClick={()=> this.handleRemove(studentId, course.id)} type='button' value='x'/>
                             </div>
                         )
-                        )}
+                    )}
                     <AssignCourse student = {studentId}/>
+
+
+
+
                 </div>
             </div>
 
