@@ -13,10 +13,10 @@ if (process.env.NODE_ENV !== 'production') {
   app.use(require('volleyball'))
 }
 
-var nunjucks = require('nunjucks');
-app.engine('html', nunjucks.render); // how to render html templates
-app.set('view engine', 'html'); // what file extension do our templates have
-var env = nunjucks.configure('views', { noCache: true }); // where to find the views, caching off
+// var nunjucks = require('nunjucks');
+// app.engine('html', nunjucks.render); // how to render html templates
+// app.set('view engine', 'html'); // what file extension do our templates have
+// var env = nunjucks.configure('views_for_nunjucks_version_retired', { noCache: true }); // where to find the views_for_nunjucks_version_retired, caching off
 
 //The code below works because `.use` returns `this` which is `app`. So what we want to return in the `module.exports` is `app`, and we can chain on that declaration because each method invokation returns `app` after mutating based on the middleware functions
 module.exports = app
